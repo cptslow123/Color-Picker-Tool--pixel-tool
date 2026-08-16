@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIXEL TOOL</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div><p class="eyebrow">PIXEL TOOL</p></div>
+        </div>
+        <div class="top-actions"><span id="image-meta">等待导入图片</span><button id="clear-button" class="icon-button" type="button" title="清空图片" aria-label="清空图片">×</button></div>
+      </header>
+
+      <section class="workspace">
+        <div class="canvas-panel">
+          <div id="drop-zone" class="drop-zone">
+            <div id="empty-state" class="empty-state">
+              <div class="upload-icon" aria-hidden="true">↥</div>
+              <h2>粘贴图片开始取色</h2>
+              <p>支持截图、复制图片、拖拽或选择本地文件</p>
+              <button id="choose-button" class="primary-button" type="button">选择图片</button>
+              <span class="shortcut-hint">Ctrl / Cmd + V</span>
+            </div>
+            <canvas id="image-canvas" class="image-canvas" aria-label="待取色图片"></canvas>
+            <div id="cursor-marker" class="cursor-marker" aria-hidden="true"></div>
+            <div id="magnifier" class="magnifier" aria-hidden="true"><canvas id="magnifier-canvas" width="168" height="168"></canvas><span class="magnifier-crosshair"></span></div>
+            <div id="canvas-hint" class="canvas-hint">移动鼠标查看像素 · 点击复制颜色</div>
+          </div>
+          <div class="canvas-toolbar">
+            <div class="toolbar-group"><button id="fit-button" class="tool-button" type="button">适应窗口</button><button id="zoom-out-button" class="square-button" type="button" title="缩小" aria-label="缩小">−</button><span id="zoom-label" class="zoom-label">100%</span><button id="zoom-in-button" class="square-button" type="button" title="放大" aria-label="放大">+</button></div>
+            <span class="canvas-note">点击图片上的任意像素复制 HEX</span>
+          </div>
+        </div>
+
+        <aside class="inspector">
+          <section class="color-preview-section"><div id="color-preview" class="color-preview"></div><div class="color-preview-info"><span class="section-label">当前颜色</span><span id="color-name" class="color-name">尚未选择</span></div></section>
+          <section class="values-section">
+            <div class="section-heading"><span class="section-label">输出</span><span id="pixel-position" class="pixel-position">—</span></div>
+            <button class="value-row" type="button" data-copy-target="hex-value"><span class="value-label">HEX</span><strong id="hex-value">—</strong><span class="copy-icon">▣</span></button>
+            <button class="value-row" type="button" data-copy-target="rgb-value"><span class="value-label">RGB</span><strong id="rgb-value">—</strong><span class="copy-icon">▣</span></button>
+            <button class="value-row" type="button" data-copy-target="hsl-value"><span class="value-label">HSL</span><strong id="hsl-value">—</strong><span class="copy-icon">▣</span></button>
+            <button class="value-row" type="button" data-copy-target="css-value"><span class="value-label">CSS</span><strong id="css-value">—</strong><span class="copy-icon">▣</span></button>
+          </section>
+          <section class="history-section"><div class="section-heading"><span class="section-label">最近颜色</span><button id="clear-history-button" class="text-button" type="button">清空</button></div><div id="history-list" class="history-list"><span class="history-empty">点击图片取色后会显示在这里</span></div></section>
+          <div id="status-message" class="status-message" role="status" aria-live="polite"></div>
+        </aside>
+      </section>
+    </main>
+    <input id="file-input" type="file" accept="image/*" hidden />
+    <script src="./main.js"></script>
+  </body>
+</html>
